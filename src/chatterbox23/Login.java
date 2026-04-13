@@ -15,47 +15,24 @@ class Login {
     String firstName;
     String lastName;
 
-    //Username validation method, I added this after to check if the username meets the required specifications
     public boolean checkUserName(String username) {
         if (username.contains("_") && username.length() <= 5) {
             return true;
-                    //"Username successfully captured.";
         } 
         else {
             return false;
-                    //"Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.";
         }
     }
 
-    public boolean checkPasswordComplexity(String password) {
-
-    boolean Uppercase = false;
-    boolean Number = false;
-    boolean SpecialChar = false;
-
-    if (password.length() <= 8) {
-        return false;
-    }
-
-    // Can be tricky in this part as it is nested if statements but I managed to get it working
-    for (int count = 0; count < password.length(); count++) {
-
-        char check = password.charAt(count);
-
-        if (Character.isUpperCase(check)) {
-            Uppercase = true;
-        }
-
-        if (Character.isDigit(check)) {
-            Number = true;
-        }
-
-        if (!Character.isLetterOrDigit(check)) {
-            SpecialChar = true;
+    boolean checkPasswordComplexity(String password){
+        if(password.length()<8 && password.matches("\\d") || password.contains("!") || password.contains("@") || password.contains("#") || 
+            password.contains("$") || password.contains("%") || password.contains("^") || 
+           password.contains("&") ||  password.contains("*") ){
+            return true;
+        }else{
+            return false;
         }
     }
-    return Uppercase && Number && SpecialChar;
-}
 
 public boolean checkCellPhoneNumber(String Num) {
         if (!Num.startsWith("+")){
@@ -64,7 +41,7 @@ public boolean checkCellPhoneNumber(String Num) {
         
         String digits = Num.replace("+", "");
         
-        if (digits.length() <= 12 && digits.matches("\\d+")){
+        if (digits.length() <= 15 && digits.matches("\\d+")){
             return true;
         }
         else {
@@ -74,7 +51,7 @@ public boolean checkCellPhoneNumber(String Num) {
 String registerUser(String username, String password, String Number) {
     this.username = username;
     this.password = password;
-    this.cellNo = Number;
+    this.Number = Number;
 return "User successfully registered!";
         }
 

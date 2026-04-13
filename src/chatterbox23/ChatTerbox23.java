@@ -68,7 +68,7 @@ public class ChatTerbox23 {
         System.out.print("Enter password : ");
         String loginPass= scan.nextLine();
         
-        boolean sucess = user.loginUser(loginUser, loginPass);
+        boolean CorrectLogin = user.loginUser(loginUser, loginPass);
         
         System.out.print("Enter your First Name : ");
         String firstName = scan.nextLine();
@@ -79,6 +79,6 @@ public class ChatTerbox23 {
         user.firstName = firstName;
         user.lastName = lastName;
         
-        System.out.println(user.returnLoginStatus(sucess));
+        System.out.println(user.returnLoginStatus(CorrectLogin));
     }
         }
