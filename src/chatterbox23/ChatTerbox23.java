@@ -11,98 +11,74 @@ import java.util.Scanner;
  */
 public class ChatTerbox23 {
 
-    /**
-     * @param args the command line arguments
-     */
-    class ChatterBox{
-   
-    String storeuserName;
-    String storepassword;
-    String storenumber;
-    
-    Scanner scan = new Scanner(System.in);
-    boolean checknummber(String number){
-        if(number.length()<10 && number.contains("27") && number.matches("//d")){
-         return false;
-            
-        }
-        return false;
-    }
-        
-    }
-    
-    
-    boolean checkuserName(String storeuserName){
-        if(storeuserName.contains("_") && storeuserName.length()==5){
-            System.out.print("User namesuccefuly captured");
-            return false;
-        }
-    return false;
-        
-    }
-
-    
-    boolean checkPasswordComplexity(String storepassword){
-        if(storepassword.length()<8 && storepassword.matches("\\d") || storepassword.contains("!") || storepassword.contains("@") || storepassword.contains("#") || 
-            storepassword.contains("$") || storepassword.contains("%") || storepassword.contains("^") || 
-           storepassword.contains("&") ||  storepassword.contains("*") ){
-            return true;
-        }else{
-            return false;
-        }
-      
-      
-           
-        
-       
-
-        void register(){
-        System.out.println("========REGISTER========");
-        
-        System.out.println("Enter your number");
-        storenumber=scan.NextInt();
-        System.out.println("Eneter your username");
-        storeuserName=Next.Line
-        System.out.println("Enter your password");
-        storepassword=Next.Int();
-        
-        if(checkNumber(storenumber) && checkuserName(storeuserName)){
-            System.out.println("registration succeful");
-        }else{
-            System.out.println("register unsucceful");
-            return false;
-        }
-          
-        
-        
-  
-        
-        
-    }
-    
-    
-    void login(){
-          
-        System.out.println("========LOGIN========");
-        
-        System.out.println("Enter your number");
-        number=scan.NextInt();
-         System.out.println("Enter your username");
-         userName=scan.NextInt();
-          System.out.println("Enter your password");
-          password=scan.NextInt();
-          
-          
-                  if(checkNumber(number) && checkuserName(userName)){
-            System.out.println("registration succeful");
-        }else{
-            System.out.println("register unsucceful");
-        }
-    }
-    }
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        Login user = new Login();
+ 
+        Scanner scan = new Scanner(System.in);
+        
+        String username;
+        String password;
+        String Number;
+        
+        while (true) {
+        System.out.print("Create username : ");
+        username = scan.nextLine();
+        
+        if(user.checkUserName(username)){
+            System.out.println("Username succeessfully captured.");
+            break;
+        } else {
+            System.out.println("Username is not correctly formatted; please ensure that your username contains an underscore and is no more than five characters in length.");
+        }
+        }
+        
+        while (true) {
+        System.out.print("Create password : ");
+        password = scan.nextLine();
+        
+        if (user.checkPasswordComplexity(password)){
+            System.out.println("Password successfully captured");
+            break;
+        } else {
+            System.out.println("Password is not correctly formatted; please ensure that the password contains at least eight characters, a capital letter, a number, and a special character.");
+        }
+        }
+        
+        while (true) {
+        System.out.print("Enter cell number : ");
+        Number = scan.nextLine();
+        
+        if (user.checkCellPhoneNumber(Number)){
+            System.out.println("Cell phone numn Numa                                                                                                                                                                                                                                    ber successfully added.");
+            break;
+        } else {
+            System.out.println("Cell phone number incorrectly formatted or does not contain international code; please correct the number and try again.");
+        }
+        }
+        
+        String result = user.registerUser(username, password, Number);
+        System.out.println(result);
+        
+        System.out.println("\n====== Login ======");
+        
+        System.out.print("Enter username : ");
+        String loginUser = scan.nextLine();
+        
+        System.out.print("Enter password : ");
+        String loginPass= scan.nextLine();
+        
+        boolean sucess = user.loginUser(loginUser, loginPass);
+        
+        System.out.print("Enter your First Name : ");
+        String firstName = scan.nextLine();
+        
+        System.out.print("Enter your Last Name : ");
+        String lastName = scan.nextLine();
+        
+        user.firstName = firstName;
+        user.lastName = lastName;
+        
+        System.out.println(user.returnLoginStatus(sucess));
     }
-    
-}
-
+        }
