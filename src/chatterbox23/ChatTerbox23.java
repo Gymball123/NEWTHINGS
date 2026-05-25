@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package chatterbox23;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *
@@ -14,13 +14,16 @@ public class ChatTerbox23 {
     public static void main(String[] args) {
         
         Login user = new Login();
+            Message text = new Message();
+      
  
         Scanner scan = new Scanner(System.in);
         
         String username;
         String password;
         String Number;
-        
+             
+         
         while (true) {
         System.out.print("Create username : ");
         username = scan.nextLine();
@@ -80,5 +83,31 @@ public class ChatTerbox23 {
         user.lastName = lastName;
         
         System.out.println(user.returnLoginStatus(CorrectLogin));
-    }
+        if (CorrectLogin) {
+         System.out.println("\n====== Create a Message ======");
+        
+        text.MessageID = text.createMessaegID();
+        System.out.println("Generated Message ID: " + text.MessageID);
+
+            
+            
+            
         }
+}
+}
+         
+        
+
+
+   
+       
+        
+    
+        
+    
+   
+    
+    
+    
+    
+        
