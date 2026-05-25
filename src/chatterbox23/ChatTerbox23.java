@@ -88,12 +88,62 @@ public class ChatTerbox23 {
         
         text.MessageID = text.createMessaegID();
         System.out.println("Generated Message ID: " + text.MessageID);
-
+        // Get valid Message ID
+        while (true) {
+            System.out.print(" Message ID : ");
+            String idInput = text.MessageID = text.createMessaegID();
+            if (text.checkMessageID(idInput)) {
+                text.MessageID = idInput;
+                break;
+            }
+            System.out.println("Invalid Message ID. Please try again.");
+        }
+        
+       
+        while (true) {
+            System.out.print("Enter Recipient Cell Number (+27..): ");
+            String cellInput = scan.nextLine();
+            String correct = text.checkRecipientCell(cellInput);
+            if (correct.equals("Valid Number")) {
+               break;
+            }else
+            {System.out.println("Invalid recipient format.");            
+        }
+        
+        
+        while (true) {
+            System.out.print("Enter your Message: ");
+            String msgInput = scan.nextLine();
+            if (text.checkMessageLength(msgInput)) {
+                text.message = msgInput;
+                break;
+            }
+            System.out.println("Message is too long! Keep it under 250 characters.");
+        }
+        String hash = text.createMessageHash(lastName);
+       
+        text.MessageHash = hash;
+        
+        // Process message sending/storing action
+        System.out.print("Do you want to 'Send', 'Store', or 'Discard' this message? ");
+        text.store = scan.nextLine();
+        
+        String actionResult = text.SentMessage();
+        System.out.println(actionResult);
+        
+      
+        System.out.println("\n=======SAVED MESSAGE=====");
+        System.out.println(text.printMessage());
+        
+        scan.close();
+    }
+}else{
+        System.out.println("Access Denied. Exiting application.");
+        }
             
             
             
         }
-}
 }
          
         
