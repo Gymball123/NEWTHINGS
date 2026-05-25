@@ -131,11 +131,13 @@ public class ChatTerbox23 {
         String actionResult = text.SentMessage();
         System.out.println(actionResult);
         
-      
+      text.saveToJSONManual("message_data.json");
+        
         System.out.println("\n=======SAVED MESSAGE=====");
         System.out.println(text.printMessage());
         
         scan.close();
+        
     }
 }else{
         System.out.println("Access Denied. Exiting application.");
