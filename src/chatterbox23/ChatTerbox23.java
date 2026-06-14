@@ -12,16 +12,21 @@ import java.util.*;
 public class ChatTerbox23 {
 
     public static void main(String[] args) {
-        
-        Login user = new Login();
+       ArrayList<String> sentMessages = new ArrayList<>();
+        ArrayList<String> disregardedMessages = new ArrayList<>();
+        ArrayList<Message> storedMessages = new ArrayList<>();
+        ArrayList<String> messageHashes = new ArrayList<>();
+        ArrayList<String> messageIDs = new ArrayList<>();
+           Login user = new Login();
             Message text = new Message();
-      
+ 
  
         Scanner scan = new Scanner(System.in);
         
         String username;
         String password;
         String Number;
+        String currentUser;
              
          
         while (true) {
@@ -124,17 +129,31 @@ public class ChatTerbox23 {
        
         text.MessageHash = hash;
         
-        // Process message sending/storing action
+       
         System.out.print("Do you want to 'Send', 'Store', or 'Discard' this message? ");
         text.store = scan.nextLine();
         
         String actionResult = text.SentMessage();
         System.out.println(actionResult);
         
-      text.saveToJSONManual("message_data.json");
+        text.saveToJSONManual("message_data.json");
+      
+       
+        if(text.store.equalsIgnoreCase("Send")) {
+            sentMessages.add(text.store);
+        } else if (text.store.equals("Disregarded")) {
+            disregardedMessages.add(text.store);
+        } else if (text.store.equals("Stored")) {
+            storedMessages.add(text);
+            
+        }
+        
+        
+        
         
         System.out.println("\n=======SAVED MESSAGE=====");
         System.out.println(text.printMessage());
+            System.out.println(storedMessages);
         
         scan.close();
         

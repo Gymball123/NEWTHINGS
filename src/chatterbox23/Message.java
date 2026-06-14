@@ -4,6 +4,14 @@
  */
 package chatterbox23;
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.Random;
+
 /**
  *
  * @author atang
@@ -16,7 +24,30 @@ class Message {
     String store;
     String Log = "";
     int Total=0;
- 
+    
+   ArrayList<String> sentMessages = new ArrayList<>();
+        ArrayList<String> disregardedMessages = new ArrayList<>();
+        ArrayList<Message> storedMessages = new ArrayList<>();
+        ArrayList<String> messageHashes = new ArrayList<>();
+        ArrayList<String> messageIDs = new ArrayList<>();
+        
+    public void saveToJSONManual(String filename) {
+      
+        String jsonString = "{\n" +
+                "  \"MessageID\": \"" + MessageID + "\",\n" +
+                "  \"RecipientCell\": \"" + RecipientCell + "\",\n" +
+                "  \"MessageHash\": \"" + MessageHash + "\",\n" +
+                "  \"message\": \"" + message + "\",\n" +
+                "  \"store\": \"" + store + "\"\n" +
+                "}";
+
+        try (FileWriter writer = new FileWriter(filename)) {
+            writer.write(jsonString);
+            System.out.println("Success: Message saved manually to " + filename);
+        } catch (IOException e) {
+            System.out.println("Error saving JSON file: " + e.getMessage());
+        }
+    }
  
     
     public String createMessaegID(){
@@ -62,6 +93,7 @@ class Message {
              String first= words[0];
              String Last=words[words.length-1];
              MessageHash = MessageID.substring(0,2) + ":" + (first+Last);
+           
              return MessageHash;
          }
          
@@ -69,21 +101,35 @@ class Message {
              return Total;
          }
          public String SentMessage() {
+            
+        Login user = new Login();
+            Message text = new Message();
+      
         if (store.equalsIgnoreCase("Send") ) {
             this.store = "Sent";
+            sentMessages.add(text.message);
+             messageHashes.add(text.MessageHash);
+             messageIDs.add(text.MessageID);
             Total++;
             
-            // Append to total messages tracking log
+          
             Log += "ID: " + this.MessageID + " | To: " + this.RecipientCell + " | Status: Sent\n";
             return "Message successfully sent.";
             
         } else if (store.equalsIgnoreCase("Discard")) {
             this.store = "Disregarded";
+            disregardedMessages.add(text.message);
             return "Press 0 to delete the message.";
             
         } else if (store.equalsIgnoreCase("Store")) {
             this.store = "Stored";
+             
+           storedMessages.add(text);
+           messageHashes.add(text.MessageHash);
+           messageIDs.add(text.MessageID);
+           
             Log += "ID: " + this.MessageID + " | To: " + this.RecipientCell + " | Status: Stored\n";
+           
             return "Message successfully stored.";
         }
         
@@ -97,8 +143,12 @@ class Message {
                "\nCellphone number: "+ RecipientCell +
                "\nMessage: "+message; 
     }
-    
+
 }
+
+
+    
+
     
     
        
